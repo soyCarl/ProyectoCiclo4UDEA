@@ -1,2 +1,2 @@
-# ProyectoCiclo4UDEA
-Aplicativo web ciclo 4 UDEA tienda virtual
+# MISIONTIC-UdeA-2022 🚀
+Proyecto oficial de desarrollo web - Ciclo 4  
