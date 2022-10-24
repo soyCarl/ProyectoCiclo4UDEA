@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi primer JS</title>
+  </head>
+  <body>
+    <p>Queremos saludarte, pero para eso necesitamos saber tu nombre:</p>
+    <br />
+    <form id="formulario">
+      Escribe tu nombre aqui:<input type="text" id="nombre" placeholder="tu nombre"/>
+      <br /><br />
+      <input type="button" value="Saludar" onclick="miFuncion()"/>
+    </form>
+
+    <script>
+        function miFuncion(){
+            var n = document.getElementById("nombre").value;
+            alert("Hola mundo! "+n);
+        }
+    </script>
+  </body>
+</html>
