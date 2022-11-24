@@ -1,7 +1,7 @@
 const express=require("express");
 const app = express();
 const errorMiddleware= require("./middleware/errors")
-const cookieParser= require('cookie-parser');
+const cookieParser= require("cookie-parser")
 const bodyParser = require('body-parser')
 const fileUpload = require('express-fileupload')
 const path = require("path")
@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use(fileUpload());
 
 //Importar rutas
-const productos=require("./routes/productos")
+const productos=require("./routes/products")
 const usuarios=require("./routes/auth")
 const ordenes=require("./routes/orders")
 

@@ -30,7 +30,7 @@ export const Payment = () => {
             cantidad: elem.quantity,
             imagen: elem.imagen,
             precio: elem.precio,
-            producto: elem.product
+            producto: elem.producto
         })
     })
 

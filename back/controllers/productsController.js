@@ -32,23 +32,23 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
 
 //Ver un producto por ID
 exports.getProductById = catchAsyncErrors(async (req, res, next) => {
-    const producto = await producto.findById(req.params.id)
+    const product = await producto.findById(req.params.id)
 
-    if (!producto) {
+    if (!product) {
         return next(new ErrorHandler("Producto no encontrado", 404))
     }
 
     res.status(200).json({
         success: true,
         message: "Aqui debajo encuentras información sobre tu producto: ",
-        producto
+        product
     })
 })
 
 //Update un producto
 exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
-    let Producto = await producto.findById(req.params.id) //Variable de tipo modificable
-    if (!producto) {
+    let product = await producto.findById(req.params.id) //Variable de tipo modificable
+    if (!product) {
         return next(new ErrorHandler("Producto no encontrado", 404))
     }
     let imagen=[]
@@ -59,9 +59,9 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
         imagen=req.body.imagen
     }
     if (imagen!== undefined){
-        //eliminar imagenes asociadas con el producto
-        for (let i=0; i<producto.imagen.lenght; i++){
-            const result= await cloudinary.v2.uploader.destroy(producto.images[i].public_id)
+        //eliminar imagenes asociadas con el product
+        for (let i=0; i<product.imagen.lenght; i++){
+            const result= await cloudinary.v2.uploader.destroy(product.images[i].public_id)
         }
 
         let imageLinks=[]
@@ -78,7 +78,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
     }
 
     //Si el objeto si existia, entonces si ejecuto la actualización
-    producto = await producto.findByIdAndUpdate(req.params.id, req.body, {
+    product = await producto.findByIdAndUpdate(req.params.id, req.body, {
         new: true, //Valido solo los atributos nuevos o actualizados
         runValidators: true
     });
@@ -86,20 +86,20 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
     res.status(200).json({
         success: true,
         message: "Producto actualizado correctamente",
-        producto
+        product
     })
 })
 
 
 //Eliminar un producto
 exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
-    const producto = await producto.findById(req.params.id) //Variable de tipo modificable
+    const product = await producto.findById(req.params.id) //Variable de tipo modificable
 
-    if (!producto) {
+    if (!product) {
         return next(new ErrorHandler("Producto no encontrado", 404))
     }
 
-    await producto.remove();//Eliminamos el proceso
+    await product.remove();//Eliminamos el proceso
     res.status(200).json({
         success: true,
         message: "Producto eliminado correctamente"
@@ -129,10 +129,10 @@ exports.newProduct = catchAsyncErrors(async (req, res, next) => {
 
     req.body.imagen=imagenLink
     req.body.user = req.user.id;
-    const producto = await producto.create(req.body);
+    const product = await producto.create(req.body);
     res.status(201).json({
         success: true,
-        producto
+        product
     })
 })
 
@@ -147,27 +147,27 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
         comentario
     }
 
-    const producto = await producto.findById(idProducto);
+    const product = await producto.findById(idProducto);
 
-    const isReviewed = producto.opiniones.find(item =>
+    const isReviewed = product.opiniones.find(item =>
         item.nombreCliente === req.user.nombre)
 
     if (isReviewed) {
-        producto.opiniones.forEach(opinion => {
+        product.opiniones.forEach(opinion => {
             if (opinion.nombreCliente === req.user.nombre) {
                 opinion.comentario = comentario,
                     opinion.rating = rating
             }
         })
     } else {
-        producto.opiniones.push(opinion)
-        producto.numCalificaciones = producto.opiniones.length
+        product.opiniones.push(opinion)
+        product.numCalificaciones = product.opiniones.length
     }
 
-    producto.calificacion = producto.opiniones.reduce((acc, opinion) =>
-        opinion.rating + acc, 0) / producto.opiniones.length
+    product.calificacion = product.opiniones.reduce((acc, opinion) =>
+        opinion.rating + acc, 0) / product.opiniones.length
 
-    await producto.save({ validateBeforeSave: false });
+    await product.save({ validateBeforeSave: false });
 
     res.status(200).json({
         success: true,
@@ -178,19 +178,19 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
 
 //Ver todas las review de un producto
 exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
-    const producto = await producto.findById(req.query.id)
+    const product = await producto.findById(req.query.id)
 
     res.status(200).json({
         success: true,
-        opiniones: producto.opiniones
+        opiniones: product.opiniones
     })
 })
 
 //Eliminar review
 exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
-    const producto = await producto.findById(req.query.idProducto);
+    const product = await producto.findById(req.query.idProducto);
 
-    const opi = producto.opiniones.filter(opinion =>
+    const opi = product.opiniones.filter(opinion =>
         opinion._id.toString() !== req.query.idReview.toString());
 
     const numCalificaciones = opi.length;

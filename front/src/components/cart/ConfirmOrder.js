@@ -47,14 +47,14 @@ export const ConfirmOrder = () => {
                     {cartItems.map(item => (
                         <Fragment>
                             <hr />
-                            <div className="cart-item my-1" key={item.product}>
+                            <div className="cart-item my-1" key={item.producto}>
                                 <div className="row">
                                     <div className="col-4 col-lg-2">
                                         <img src={item.imagen} alt={item.nombre} height="45" width="65" />
                                     </div>
 
                                     <div className="col-5 col-lg-6">
-                                        <Link to={`/producto/${item.product}`}>{item.nombre}</Link>
+                                        <Link to={`/producto/${item.producto}`}>{item.nombre}</Link>
                                     </div>
 
 
