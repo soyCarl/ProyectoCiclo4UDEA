@@ -507,11 +507,11 @@ footer {
 }
 
 #sidebar .sidebar-header {
-  padding: 20px;
+  padding: 10px;
   background: #232f3e;
 }
 #sidebar ul.components {
-  padding: 5px 0px;
+  padding: 2px 0px;
   border-bottom: 1px solid #232f3e;
 }
 
@@ -543,7 +543,7 @@ a[data-toggle='collapse'] {
   display: block;
   position: absolute;
   top: 50%;
-  right: 20px;
+  right: -5px;
   transform: translateY(-50%);
 }
 

@@ -34,6 +34,7 @@ export const Home = () => {
             {loading ? <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i> : (
                 <Fragment>
                     <MetaData title="Universo anime"></MetaData>
+                    <br></br>
                     <h1 id="encabezado_productos">Ultimos Productos</h1>
 
                     <section id="productos" className='container mt-5'>
